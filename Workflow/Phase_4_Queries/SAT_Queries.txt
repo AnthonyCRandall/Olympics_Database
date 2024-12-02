@@ -1,0 +1,31 @@
+Anthony Randall
+
+1. How many students classified as 'Other'?
+-SELECT COUNT (*) FROM STUDENT_INFO WHERE gender = 'Other';
+
+2. Find the average of all of the SAT scores 
+- SELECT AVG (totalsatscore) FROM SAT_INFO; 
+
+3. List all the students whos phone number starts with '516' and adress ends with 'Drive'
+- SELECT * FROM STUDENT_INFO WHERE studentphonenumber LIKE '516%' AND studentaddress LIKE '%Drive';
+
+4. List all of the students first and last names along with their student ID of those whos scored in the 95th percentile or better
+- SELECT sti.name, sti.lastname FROM STUDENT_INFO sti, SAT_INFO sat WHERE sti.studentID = sat.studentID AND sat.totalpercentile > 95;
+
+5. Display the parents emails of the students who scored less than a 900 total score in the SAT
+- SELECT pi.parentEmail FROM PAYMENT_INFO pi, STUDENT_INFO sti, SAT_INFO sat WHERE sti.studentID = sat.studentID AND sti.studentID = pi.studentID AND sat.totalSatScore < 900;
+
+6. List the students IDs of those who do NOT have a waiver code?
+- SELECT sti.name, sti.lastname FROM STUDENT_INFO sti, BILLING_INFO bi WHERE sti.studentID = bi.studentID AND bi.waiverCode IS NULL;
+
+7. List the students and where they took their exams of those who either scored above a 700 on either the math or ebrw section of the SAT
+- SELECT sti.name, sti.lastname, sat.examLocation FROM STUDENT_INFO sti, SAT_INFO sat WHERE sat.studentID = sti.studentID AND (sat.mathscore > 700 OR sat.ebrwScore > 700);
+
+8. Show all the costs of the exam padded a leading '$' 
+- SELECT LPAD(totalCost, 3, '$') FROM BILLING_INFO;
+
+9. List all the students whos last name sounds like 'hgrd'
+- SELECT lastname FROM STUDENt_INFO WHERE SOUNDEX(lastname) = SOUNDEX('hgrd');
+
+10. Select the SAT information of the tests taken in March
+- SELECT * FROM SAT_INFO WHERE (satdate LIKE '05%')
